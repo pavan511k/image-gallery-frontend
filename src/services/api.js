@@ -2,8 +2,13 @@
 import axios from 'axios';
 import { getIdToken } from './auth';
 
-// IMPORTANT: Replace with your actual API base URL
-const API_BASE_URL = 'https://localhost:7001/api'; // Or your deployed Azure API URL
+// --- MODIFIED LINE HERE ---
+// Use import.meta.env to access Vite environment variables.
+// VITE_API_BASE_URL will be used in production builds (from .env.production).
+// The || 'https://localhost:7001/api' provides a fallback for local development
+// if VITE_API_BASE_URL is not defined in your local .env or .env.development.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://localhost:7001/api';
+// --- END MODIFIED LINE ---
 
 const api = axios.create({
   baseURL: API_BASE_URL,
